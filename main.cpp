@@ -1,4 +1,5 @@
-//Author: Justin Craven
+//Author: Justin Craven 
+//Versin: 0.2
 #include <iostream>
 #include <fstream>
 #include <vector>
