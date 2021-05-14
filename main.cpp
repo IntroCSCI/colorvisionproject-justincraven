@@ -1,9 +1,10 @@
-//Author: Justin Craven 
-//Versin: 0.2
+//Author: Justin Craven
+//Versin: 1.0
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <cmath>
+#include "colorList.h"
 using namespace std;
 
 //Prototypes
@@ -112,6 +113,15 @@ void displayInt(vector < int > nums) {
   for (int i = 0; i < nums.size(); i += 3)
     cout << "(" << nums[i] << ", " << nums[i + 1] << ", " << nums[i + 2] << ")\n";
 }
+//function to display a vector of doubles
+void displayDouble(vector < double > num) {
+  //cout << "GreyValues:\n";
+  for (int i = 0; i < num.size(); i++) {
+    cout << num[i] << endl;
+  }
+}
+
+
 //function to create a vector full of hex color codes found to be viable in the rgbConvert function- removes any strings mistaken for hex color codes
 vector < string > setColors(vector < string > colors, string hex) {
 
@@ -175,13 +185,6 @@ vector < double > greyValue(vector < string > hex) {
 
   return greyScale;
 }
-//function to display a vector of doubles
-void displayDouble(vector < double > num) {
-  //cout << "GreyValues:\n";
-  for (int i = 0; i < num.size(); i++) {
-    cout << num[i] << endl;
-  }
-}
 //getX functions: retrieve the r, g, or b values from a hex color code. 
 int getR(string & hex) {
 
@@ -244,7 +247,7 @@ void colorSimilarity(vector<string> doms){
   int y=0;
   int p=0;
   int t=0;
-  int grey=0;
+  int gs=0;
   
 
   for(int i=0; i<doms.size();i++){
@@ -266,7 +269,7 @@ void colorSimilarity(vector<string> doms){
     else if(doms[i]=="turquoise"){
       t+=1;}
     else if(doms[i]== "greyscale"){
-      grey+=1;
+      gs+=1;
     }
   }
   
@@ -277,13 +280,14 @@ void colorSimilarity(vector<string> doms){
   cout<< "yellow: "<<y<<endl;
   cout<< "turquoise: "<<t<<endl;
   cout<< "purple: "<<p<<endl;
-  cout<< "GreyScale: "<<grey<<endl;
+  cout<< "GreyScale: "<<gs<<endl;
 
 
 }
 int main() {
   string file, input;
   fstream reader;
+  colorList cList;
   char choice = 'y';
   //Prompt User to Enter File Name For Analysis
   while (choice == 'y' || choice == 'Y') {
@@ -302,7 +306,7 @@ int main() {
             //search for end of hex code and save the digits as a string
             for (int digit = 1; digit < 7; digit++) {
               if (input[i + digit] == ';') {
-                digit = 7;
+                break;
               }
               num += (input[i + digit]);
 
@@ -333,7 +337,10 @@ int main() {
       displayInt(rgbVals);
       displayDouble(greyScales);
       displayString(dominances);
-      colorSimilarity(dominances);
+      cList.getColors(dominances);
+      cList.colorConflictsRG();
+      cList.colorConflictsBY();
+      
       reader.close();
       ofstream output;
       output.open("output.txt");

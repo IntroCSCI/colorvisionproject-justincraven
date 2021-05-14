@@ -1,6 +1,6 @@
 HOW DIFFICULT IS IT TO READ YOUR SITE FOR COLORBLIND PEOPLE?
  
-Inputing a CSS File should result in a grading of how difficult it is to read your site for people with different types of colorblindness.
+Inputing a CSS File should result in a quick analysis of how difficult it is to read your site for people with different types of colorblindness.
  
 ### v0.1 Updates
  
@@ -19,8 +19,7 @@ counts the number of each color for analysis.
 in future plan to determine which colors conflict with different types of colorblindness, determine if color combinations of css file conflict.
 ### v1.0 Updates
  
-*Coming soon*
- 
+Added the Colorlist class to test if a list of colors may cause issues for people with deuteranopia, Deueranomaly, Protanopia, Protanomaly, Tritanomaly, or Tritanopia. 
  
 ## Developer
  
@@ -38,7 +37,73 @@ g++ --std=c++11 *.cpp -o cvp
 Here is an example of the program running:
  
 ```
-g++ -std=c++11 *.cpp -o cvp; ./cvp
+ g++ -std=c++11 *.cpp -o cvp; ./cvp
+File to open:
+test.css
+fcf8e3
+777777
+428bca
+3071a9
+3c763d
+2b542c
+31708f
+245269
+8a6d3b
+66512c
+a94442
+843534
+fff
+c1e2b3
+d9edf7
+afd9ee
+f7ecb5
+f2dede
+e4b9b9
+eeeeee
+dff0d8
+(252, 248, 227)
+(119, 119, 119)
+(66, 139, 202)
+(48, 113, 169)
+(60, 118, 61)
+(43, 84, 44)
+(49, 112, 143)
+(36, 82, 105)
+(138, 109, 59)
+(102, 81, 44)
+(169, 68, 66)
+(132, 53, 52)
+(15, 15, 15)
+(193, 226, 179)
+(217, 237, 247)
+(175, 217, 238)
+(247, 236, 181)
+(242, 222, 222)
+(228, 185, 185)
+(238, 238, 238)
+(223, 240, 216)
+246.802
+119
+124.355
+99.949
+94.16
+67.181
+96.697
+70.868
+111.971
+83.061
+97.971
+76.507
+15
+210.775
+232.16
+206.836
+233.019
+227.98
+197.857
+238
+232.181
+ g++ -std=c++11 *.cpp -o cvp; ./cvp
 File to open:
 test.css
 fcf8e3
@@ -132,6 +197,10 @@ yellow: 3
 turquoise: 3
 purple: 0
 GreyScale: 6
+The file uses Red and Green colors which could create conflicts for people with red/green colorblindess (deuteranopia/Deueranomaly/Protanopia/Protanomaly)
+The file uses Blue and Green colors which could create conflicts for people with Tritanomaly/Tritanopia
+The file uses Red and Yellow colors which could create conflicts for people with  Tritanomaly
+a large percentage of the colors are yellow and red which will most likely cause issues for people with Tritanomaly
 Analyze another file (y/n)?
 n
 ```
@@ -190,6 +259,5 @@ int getB(string&);
  
 ### Classes
  
-*Coming in version 1.0*
- 
+Includes the colorList class. This class is built to hold the and analyze the colors of a website. It takes the amounts of each basic color (red, green, blue, yellow, purple, and turquoise) and determines if there are incompatible colors for several common types of colorblindess. There are 3 member functions as well as a constructor. 
 
